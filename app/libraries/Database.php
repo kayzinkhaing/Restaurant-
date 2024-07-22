@@ -107,6 +107,80 @@ class Database
         $row = $stm->fetch(PDO::FETCH_ASSOC);
         return ($success) ? $row : [];
     }
+    public function filterByMultipleColumns($table, $conditions)
+    {
+        // Initialize the SQL query
+        $sql = 'SELECT * FROM ' . $table . ' WHERE ';
+        
+        // Create an array to hold the column-value pairs for the SQL query
+        $clauses = [];
+        $parameters = [];
+
+        // Loop through the conditions array to build the SQL query dynamically
+        foreach ($conditions as $column => $value) {
+            // Skip empty values
+            if (empty($value)) {
+                continue;
+            }
+            
+            $column = str_replace('`', '', $column); // Remove any backticks from column names
+            $clauses[] = "`$column` = :$column";
+            $parameters[":$column"] = $value;
+        }
+
+        // Join the clauses with 'AND' to form the final WHERE clause
+        if (empty($clauses)) {
+            return []; // Return empty array if no conditions
+        }
+        
+        $sql .= implode(' AND ', $clauses);
+
+        // Prepare and execute the SQL statement
+        $stm = $this->pdo->prepare($sql);
+
+        // Bind the values dynamically
+        foreach ($parameters as $param => $value) {
+            $stm->bindValue($param, $value);
+        }
+
+        // Execute the statement and fetch all results
+        $success = $stm->execute();
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+        
+        // Return the results
+        return ($success) ? $row : [];
+    }
+
+    public function increaseQuantity($userId, $itemId, $price)
+    {
+        try {
+            // SQL query to update the quantity and total price
+            $sql = "UPDATE cart 
+                    SET quantity = quantity + 1, 
+                        total_amount = total_amount + :parsed_price 
+                    WHERE user_id = :user_id AND item_id = :item_id";
+            
+            // Prepare the statement
+            $stm = $this->pdo->prepare($sql);
+            
+            // Bind the parameters
+            $stm->bindValue(':parsed_price', $price, PDO::PARAM_STR); // Use PDO::PARAM_STR if price is a decimal
+            $stm->bindValue(':user_id', $userId, PDO::PARAM_INT);
+            $stm->bindValue(':item_id', $itemId, PDO::PARAM_INT);
+            
+            // Execute the query
+            $success = $stm->execute();
+            
+            // Return success or failure
+            return $success;
+        } catch (Exception $e) {
+            // Handle any exceptions
+            echo($e->getMessage());
+            return false;
+        }
+    }
+    
+
 
     public function loginCheck($email, $password)
     {
@@ -232,15 +306,55 @@ class Database
         }
      
     }
-    public function getTotalCount($table)
-{
-    $sql = 'SELECT COUNT(*) as total FROM `' . $table . '`'; // Using backticks around table name
-    $stm = $this->pdo->prepare($sql);
-    $stm->execute();
-    $result = $stm->fetch(PDO::FETCH_ASSOC);
 
-    return $result['total'];
-}
+    public function getTotalCount($table)
+    {
+        $sql = 'SELECT COUNT(*) as total FROM `' . $table . '`'; // Using backticks around table name
+        $stm = $this->pdo->prepare($sql);
+        $stm->execute();
+        $result = $stm->fetch(PDO::FETCH_ASSOC);
+    
+        return $result['total'];
+    }
+    public function getTotalCartCount(string $table, $column, $value): int
+    {
+        $sql = 'SELECT SUM(`quantity`) as total FROM ' . $table . ' WHERE ' . $column . ' = :value';
+
+        try {
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindValue(':value', $value);
+            $stm->execute();
+            $result = $stm->fetch(PDO::FETCH_ASSOC);
+
+            if ($result === false) {
+                throw new Exception("Failed to fetch total count for table: $table");
+            }
+
+            return (int) $result['total'];
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    // public function getQtyForEachItem(string $table, $column, $value): int
+    // {
+    //     $sql = 'SELECT SUM(`quantity`) as total FROM ' . $table . ' WHERE ' . $column . ' = :value';
+
+    //     try {
+    //         $stm = $this->pdo->prepare($sql);
+    //         $stm->bindValue(':value', $value);
+    //         $stm->execute();
+    //         $result = $stm->fetch(PDO::FETCH_ASSOC);
+
+    //         if ($result === false) {
+    //             throw new Exception("Failed to fetch total count for table: $table");
+    //         }
+
+    //         return (int) $result['total'];
+    //     } catch (PDOException $e) {
+    //         throw new Exception("Database error: " . $e->getMessage());
+    //     }
+    // }
 
 }
 

@@ -4,11 +4,14 @@
 <?php require APPROOT . '/views/components/auth_message.php'; ?>
 
     <div class="container-fluid">
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-        </div>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800" style="font-style: italic;">Dashboard</h1>
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+    </a>
+</div>
+
+
         <div class="row">
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
@@ -21,7 +24,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $data['menu']; ?></div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            <i class="fas fa-utensils fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -41,7 +44,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $data['category']; ?></div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            <i class="fas fa-list fa-2x text-gray-300"></i> <!-- Change this line -->
                             </div>
                         </div>
                     </div>
@@ -60,7 +63,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $data['users']; ?></div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fas fa-users fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -91,7 +94,8 @@
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                <!-- <i class="fas fa-clipboard-list fa-2x text-gray-300"></i> -->
+                                <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>

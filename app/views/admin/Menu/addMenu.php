@@ -37,14 +37,21 @@
                     </div>
 
                     <div class="row p-t-20">
-                        <div class="col-md-6">
+                    <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Quantity</label>
+                                <input type="number" name="quantity" class="form-control" >
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">Price</label>
                                 <input type="number" name="price" class="form-control" placeholder="MMK" >
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">Image</label>
                                 <input type="file" name="image" class="form-control" accept="image/*" >

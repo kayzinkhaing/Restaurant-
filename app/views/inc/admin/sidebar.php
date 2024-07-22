@@ -13,7 +13,8 @@
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
         <a class="nav-link animated" href="<?php echo URLROOT;?>/dashboard/admin">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+        <i class="fi fi-rr-dashboard-monitor"></i>
+
             <span>Dashboard</span>
         </a>
     </li>
@@ -63,7 +64,7 @@
     </li>
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed animated" href="<?php echo URLROOT; ?>/tableController" data-toggle="collapse" data-target="#collapseTables"
             aria-expanded="true" aria-controls="collapseTables">
             <i class="fa-solid fa-table"></i>
@@ -73,9 +74,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <!-- <a class="collapse-item" href="<?php //echo URLROOT; ?>/tableController/index">All Tables</a> -->
                 <!-- <a class="collapse-item" href="<?php //echo URLROOT; ?>/tableController/create">Add Table</a> -->
-            </div>
+            <!-- </div>
         </div>
-    </li>
+    </li>  -->
 
     <!-- Nav Item - Users -->
     <li class="nav-item">
@@ -86,7 +87,7 @@
     </li>
 
     <!-- Nav Item - Employees -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed animated" href="<?php echo URLROOT; ?>/employeeController" data-toggle="collapse" data-target="#collapseEmployees"
             aria-expanded="true" aria-controls="collapseEmployees">
             <i class="fa-solid fa-user-tie"></i>
@@ -101,7 +102,7 @@
                 <a class="collapse-item" href="<?php echo URLROOT;?>/positionController/create">Add Position</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -115,7 +116,7 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="login.html">About Us</a>
+                <!-- <a class="collapse-item" href="login.html">About Us</a> -->
                 <a class="collapse-item" href="<?php echo URLROOT;?>/contactController/index">Contact Us</a>
                 <a class="collapse-item" href="<?php echo URLROOT;?>/controllers/Pages/login">Logout</a>
                 <a class="collapse-item" href="forgot-password.html">Forgot Password</a>

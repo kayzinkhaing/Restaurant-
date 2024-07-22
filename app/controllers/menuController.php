@@ -6,26 +6,58 @@ class menuController extends Controller
 
     public function __construct(){
         $this->model('MenuModel');
+        session_start();
         $this->db =  new Database();
     }
-    public function menu(){
-        
+    public function menu()
+    {
         if (isset($_GET['category_id'])) {
             $categoryId = $_GET['category_id'];
-            if($categoryId == 0) {
+            if ($categoryId == 0) {
                 $menus = $this->db->readAll('view_menu');
-            }else{
+            } else {
                 $menus = $this->db->getByCategoryId('menu', 'category_id', $categoryId);
             }
-            
-            header('Content-Type: application/json');
-            echo json_encode($menus);
-        } else {
-            // Handle the case where category_id is not set
-            header('Content-Type: application/json');
 
+            header('Content-Type: text/html');
+            $html = '';
+            foreach ($menus as $menu) {
+                $html .= $this->createMenuItemHTML($menu);
+            }
+            echo $html;
+        } else {
+            header('Content-Type: application/json');
             echo json_encode(['error' => 'Category ID not provided']);
         }
+    }
+
+    private function createMenuItemHTML($menu)
+    {
+        $urlroot = URLROOT; // Assuming URLROOT is a defined constant
+        $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+
+        return "
+            <div class='col-md-3'>
+            <div class='card mb-4 shadow-sm border-0'>
+                <img class='card-img-top' src='{$urlroot}/public/food_images/{$menu['image']}' alt='{$menu['name']}' style='height: 300px; width: 300px;'>
+                <div class='card-body'>
+                    <div class='row'>
+                        <div class='col-8'>
+                            <h5 class='card-title'>{$menu['name']}</h5>
+                            <p class='card-text'>{$menu['description']}</p>
+                            <p class='card-text'>{$menu['price']} MMK</p>
+                        </div>
+                        <div class='col-4 text-right'>
+                            <button class='btn btn-primary btn-add-to-cart' data-user-id='{$userId}' data-item-id='{$menu['id']}' data-price='{$menu['price']}'>
+                                <i class='fas fa-cart-plus'></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            ";
+
     }
     public function index(){
 
@@ -82,7 +114,7 @@ class menuController extends Controller
             $menu->setDate(date('Y-m-d H:i:s'));
     
             // Save menu item to database
-            $menuCreated = $this->db->create('menu', $menu->toArray());
+            $menuCreated = $this->db-> create('menu', $menu->toArray());
             if ($menuCreated) {
                 setMessage('success', 'Menu Created Successfully');
                 redirect('menuController/index');

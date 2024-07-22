@@ -1,79 +1,117 @@
 <?php require_once APPROOT . '/views/inc/user/header.php'; ?>
 <?php require_once APPROOT . '/views/inc/user/navbar.php'; ?>
+
 <?php
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-// class ContactController {
+require '../vendor/autoload.php';
 
-//     public function store() {
-//         // Include PHPMailer classes
-//         require_once 'path/to/vendor/autoload.php'; // Adjust the path as necessary
+$errors = [];
+$successMessage = '';
 
-//         // Create PHPMailer instance
-//         $mail = new PHPMailer();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = trim($_POST['contact_nom']);
+    $email = trim($_POST['contact_email']);
+    $message = trim($_POST['contact_message']);
 
-//         // Check if form was submitted
-//         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//             // Retrieve and sanitize form data
-//             $name = trim(filter_input(INPUT_POST, 'contact_nom', FILTER_SANITIZE_STRING));
-//             $email = trim(filter_input(INPUT_POST, 'contact_email', FILTER_SANITIZE_EMAIL));
-//             $message = trim(filter_input(INPUT_POST, 'contact_message', FILTER_SANITIZE_SPECIAL_CHARS));
+    // Basic validation
+    if (empty($name)) {
+        $errors['contact_nom'] = 'Name is required';
+    }
+    if (empty($email)) {
+        $errors['contact_email'] = 'Email is required';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors['contact_email'] = 'Invalid email format';
+    }
+    if (empty($message)) {
+        $errors['contact_message'] = 'Message is required';
+    }
 
-//             // Validate form data
-//             if (empty($name) || empty($email) || empty($message)) {
-//                 // Handle error (e.g., redirect with an error message)
-//                 header("Location: " . URLROOT . "/contact?error=missingfields");
-//                 exit;
-//             }
-//             if (!PHPMailer::validateAddress($email)) {
-//                 // Handle error (e.g., redirect with an error message)
-//                 header("Location: " . URLROOT . "/contact?error=invalidemail");
-//                 exit;
-//             }
+    if (empty($errors)) {
+        // No errors, send email
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'kayzinkhaing1331@gmail.com'; // Use environment variables for security
+            $mail->Password = 'fjao fval immz iylg';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
 
-//             // Configure PHPMailer
-//             $mail->isSMTP();
-//             $mail->SMTPDebug = 2; // Set to 0 in production
-//             $mail->Host = 'smtp.example.com'; // Your SMTP server
-//             $mail->Port = 587; // SMTP port
-//             $mail->SMTPSecure = 'tls'; // Encryption method
-//             $mail->SMTPAuth = true;
-//             $mail->Username = 'your-email@example.com'; // Your email
-//             $mail->Password = 'your-email-password'; // Your email password
+            $mail->setFrom('kayzinkhaing1331@gmail.com', 'Restaurant');
+            $mail->addAddress('kayzinkhaing1331@gmail.com'); // Change to your recipient email
 
-//             $mail->setFrom('your-email@example.com', 'Your Name');
-//             $mail->addAddress('recipient@example.com', 'Recipient Name');
-//             $mail->Subject = 'Contact Us Message from ' . $name;
-//             $mail->Body = "Name: $name\nEmail: $email\n\nMessage:\n$message";
+            $mail->isHTML(true);
+            $mail->Subject = 'New Contact Form Submission';
+            $mail->Body    = "Name: $name<br>Email: $email<br>Message: $message";
+            $mail->AltBody = "Name: $name\nEmail: $email\nMessage: $message";
 
-//             // Send email and handle errors
-//             if ($mail->send()) {
-//                 header("Location: " . URLROOT . "/contact?status=success");
-//             } else {
-//                 header("Location: " . URLROOT . "/contact?error=" . $mail->ErrorInfo);
-//             }
-//             exit;
-//         }
-//     }
-// }
+            $mail->send();
+            $successMessage = 'Thank you for reaching out! Your message has been received and we will get back to you soon.';
+        } catch (Exception $e) {
+            $errors['mail'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
+}
 ?>
 
-<section id="contact">
-	<div class="sectionheader">	<h1>CONTACT US</h1></div>
-	<article>
-	<p>You can say anything for us.</p>
-		
-			<label for="checkcontact" class="contactbutton">Click Here<div class="mail"></div></label><input id="checkcontact" type="checkbox">
-	
-			<form action="<?php echo URLROOT; ?>" method="post" class="contactform">
-				<p class="input_wrapper"><input type="text" name="contact_nom" value=""  id ="contact_nom"><label for="contact_nom">NAME</label></p>
-				<p class="input_wrapper"><input type="text" name="contact_email" value=""  id ="contact_email"><label for="contact_email">EMAIL</label></p>
-				<p class="textarea_wrapper"><textarea name="contact_message" id="contact_message"></textarea></p>
-				<p class="submit_wrapper"><input type="submit" value="Send a Message"></p>			
-			</form>
-	</article>
-</section>
+<style>
+    .message-box {
+        border: 1px solid #ddde2a;
+        padding: 15px;
+        margin: 15px 0;
+        text-align: center;
+        background-color: #e25be3a3;
+    }
+    .error {
+        color: red;
+    }
+</style>
 
+          <section id="contact">
+            <?php if (!empty($successMessage)): ?>
+                <div class="message-box"><?php echo $successMessage; ?></div>
+            <?php endif; ?>
+    <div class="sectionheader">
+        <h1>DEAR CUSTOMERS</h1>
+    </div>
+    <article>
+        <p>You can say anything to us.</p>
+        
+        <label for="checkcontact" class="contactbutton">Click Here<div class="mail"></div></label>
+        <input id="checkcontact" type="checkbox">
+
+        <form action="contact" method="post" class="contactform">
+          
+
+            <p class="input_wrapper">
+                <input type="text" name="contact_nom" id="contact_nom" value="<?php echo htmlspecialchars($name ?? ''); ?>">
+                <label for="contact_nom">NAME</label>
+                <?php if (isset($errors['contact_nom'])): ?>
+                    <p class="error"><?php echo $errors['contact_nom']; ?></p>
+                <?php endif; ?>
+            </p>
+            <p class="input_wrapper">
+                <input type="text" name="contact_email" id="contact_email" value="<?php echo htmlspecialchars($email ?? ''); ?>">
+                <label for="contact_email">EMAIL</label>
+                <?php if (isset($errors['contact_email'])): ?>
+                    <p class="error"><?php echo $errors['contact_email']; ?></p>
+                <?php endif; ?>
+            </p>
+            <p class="textarea_wrapper">
+                <textarea name="contact_message" id="contact_message"><?php echo htmlspecialchars($message ?? ''); ?></textarea>
+                <?php if (isset($errors['contact_message'])): ?>
+                    <p class="error"><?php echo $errors['contact_message']; ?></p>
+                <?php endif; ?>
+            </p>
+            <p class="submit_wrapper">
+                <input type="submit" value="Send a Message">
+            </p>           
+        </form>
+    </article>
+</section>
 
 <?php require_once APPROOT . '/views/inc/user/footer.php'; ?>

@@ -62,7 +62,7 @@
 <script src="<?php echo URLROOT; ?>/js/aos/aos.js"></script>
 <script src="<?php echo URLROOT; ?>/js/glightbox/js/glightbox.min.js"></script>
 <script src="<?php echo URLROOT; ?>/js/purecounter/purecounter_vanilla.js"></script>
-<script src="<?php echo URLROOT; ?>/js/swiper-bundle.min.js"></script>
+<!-- <script src="<?//php// echo URLROOT; ?>/js/swiper-bundle.min.js"></script> -->
 
 
 
@@ -76,11 +76,11 @@
     <script src="<?php echo URLROOT; ?>/js/admin/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="<?php echo URLROOT; ?>/js/admin/Chart.min.js"></script>
+    <!-- <script src="<?//php echo URLROOT; ?>/js/admin/Chart.min.js"></script> -->
 
     <!-- Page level custom scripts -->
-    <script src="<?php echo URLROOT; ?>/js/admin/chart-area-demo.js"></script>
-    <script src="<?php echo URLROOT; ?>/js/admin/chart-pie-demo.js"></script>
+    <!-- <script src="<?//php echo URLROOT; ?>/js/admin/chart-area-demo.js"></script>
+    <script src="<?//php echo URLROOT; ?>/js/admin/chart-pie-demo.js"></script> -->
 <!-- Copyright -->
     
 <script src="<?php echo URLROOT; ?>/js/admin/lib/jquery/jquery.min.js"></script>

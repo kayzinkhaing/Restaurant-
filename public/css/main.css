@@ -281,7 +281,7 @@ h6 {
 .header .btn-getstarted,
 .header .btn-getstarted:focus {
   color: var(--contrast-color);
-  background: var(--accent-color);
+  background: #cea612;
   font-size: 14px;
   padding: 8px 26px;
   margin: 0;

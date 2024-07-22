@@ -6,7 +6,6 @@ class OrderModel
     private $item_id;
     private $Quantity;
     private $total_amount;
-    private $seat_id;
     private $Status;
     private $Reg_Date;
 
@@ -60,15 +59,6 @@ class OrderModel
         return $this->total_amount;
     }
 
-    // Seat ID
-    public function setSeatId($seat_id)
-    {
-        $this->seat_id = $seat_id;
-    }
-    public function getSeatId()
-    {
-        return $this->seat_id;
-    }
 
     // Status
     public function setStatus($Status)
@@ -99,7 +89,6 @@ class OrderModel
             'item_id' => $this->getItemId(),
             'Quantity' => $this->getQuantity(),
             'total_amount' => $this->getTotalAmount(),
-            'seat_id' => $this->getSeatId(),
             'Status' => $this->getStatus(),
             'Reg_Date' => $this->getRegDate()
         ];

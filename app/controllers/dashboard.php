@@ -17,7 +17,7 @@ class dashboard extends Controller
     // }
     public function admin()
 {
-    $menu = $this->db->getTotalCount('menu');
+    $menu = $this->db->getTotalCount('view_menu');
     $category = $this->db->getTotalCount('category');
     $users = $this->db->getTotalCount('users');
     $order = $this->db->getTotalCount('order'); // Include the order count

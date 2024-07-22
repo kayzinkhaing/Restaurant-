@@ -30,6 +30,7 @@ class Auth extends Controller
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            
             // Check user exists
             $email = $_POST['email'];
             $isUserExist = $this->db->columnFilter('users', 'email', $email);
@@ -127,7 +128,6 @@ public function login()
         $password = base64_encode($_POST['password']); // Encode password for comparison
         // echo($password);
         // exit;
-
 
         $user = $this->db->columnFilter('users', 'email', $email);
         // echo '<pre>';

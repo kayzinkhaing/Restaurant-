@@ -82,12 +82,11 @@
                           <p class="card-text"><?php echo htmlspecialchars($menu['price']) . " MMK"; ?></p>
                         </div>
                         <div class="col-4 text-right">
-                              <button class="btn btn-primary btn-add-to-cart">
+                              <button class="btn btn-primary btn-add-to-cart" 
+                              data-user-id="<?= $_SESSION['user_id'] ?? 0 ?>" data-item-id="<?= $menu['id'] ?>" data-price="<?= $menu['price'] ?>">
                                   <i class="fas fa-cart-plus"></i>
                               </button>
                 </div>
-
-
                       </div>
                     </div>
                   </div>
@@ -106,77 +105,118 @@
 </main>
 <?php require_once APPROOT . '/views/inc/user/footer.php'; ?>
 <script type="text/javascript">
-
-$(document).ready(function(){
-
-    $('#category_id').on('change', function(){
-      $('#allmenu').hide();
-        var categoryId = $(this).val();
-        //alert(categoryId);  // This line is just for debugging, you can remove it later.
-        var form_url = '<?php echo URLROOT; ?>/menuController/menu';
-
-        $.ajax({
-            url: form_url,
-            type: 'GET',
-            data: { category_id: categoryId },  // Pass category_id directly
-            success: function(response) {
-             
-              if (response.length > 0) {
-                  $('#name').empty();
-                    $.each(response, function(index, menu) {
-                     
-                        var menuItem = `
-                            <div class="col-md-3">
-                                <div class="card mb-4 shadow-sm border-0">
-                                    <img class="card-img-top" src="<?php echo URLROOT; ?>/public/food_images/${menu.image}" alt="${menu.name}" style="height: 300px; width: 300px;">
-                                    <div class="card-body">
-                                    <div class="row">
-                                       <div class="col-8">
-                                            <h5 class="card-title">${menu.name}</h5>
-                                            <p class="card-text">${menu.description}</p>
-                                            <p class="card-text">${menu.price} MMK</p>
-                                       </div>
-                                         <div class="col-4 text-right">
-                              <button class="btn btn-primary btn-add-to-cart">
-                                  <i class="fas fa-cart-plus"></i>
-                              </button>
-                               </div>
-
-                                    </div>
-                                    </div>`;
-                        $('#name').append(menuItem);
-                    });
-                } 
+  $(document).ready(function() {
+    const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
+    addToCartButtons.forEach(button => { 
+      var itemId = button.getAttribute('data-item-id');
+      $.ajax({
+            url: '<?php echo URLROOT; ?>/cartController/getQtyForEachItem', // Adjust the URL to your cartController's endpoint
+            type: 'POST',
+            data: {
+              item_id: itemId
+            },
+            success: function(response) { 
+              if (response.trim() === "disabled") {
+                    button.disabled = true;
+                }
+              //  $('#cart-count').text(response);
+            },
+            error: function(xhr, status, error) {
+                // Handle any errors
+                alert('An error occurred while adding the item to the cart.');
             }
         });
     });
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    let cartCount = 0;
-    const cartCountElement = document.getElementById('cart-count');
-    const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
-
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            var form_url = '<?php echo URLROOT; ?>/menuController/menu';
-
-            $.ajax({
-                url: form_url,
-                type: 'GET',
-                data: { category_id: categoryId },  // Pass category_id directly
-                success: function(response) {
-                
-                 
-                }
-            });
-            //cartCountElement.textContent = cartCount;
+    $(document).on('click', '.btn-add-to-cart', function() {
+        var itemId = $(this).data('item-id');
+        var userId = $(this).data('user-id');
+        var price = $(this).data('price');
+        var qty = 1; 
+        var url = '<?php echo URLROOT; ?>/cartController/addToCart';
+        
+        if (userId == 0) {
+            // Redirect to login page if the user is not logged in
+            window.location.href = '<?php echo URLROOT; ?>/Auth/login';
+            return; // Exit the function
+        }
+        // You can now send an AJAX request to add this item to the cart
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+              item_id: itemId,
+              qty: qty,
+              price: price
+            },
+            success: function(response) {
+               $('#cart-count').text(response);
+            },
+            error: function(xhr, status, error) {
+                // Handle any errors
+                alert('An error occurred while adding the item to the cart.');
+            }
         });
     });
-});
 
 
+    $('#category_id').on('change', function() {
+      $('#allmenu').hide();
+      var categoryId = $(this).val();
+      //alert(categoryId);  // This line is just for debugging, you can remove it later.
+      var form_url = '<?php echo URLROOT; ?>/menuController/menu';
+
+      $.ajax({
+        url: form_url,
+        type: 'GET',
+        data: {
+          category_id: categoryId
+        }, // Pass category_id directly
+        success: function(response) {
+
+          $('#name').empty();
+          $('#name').append(response);
+        }
+      });
+    });
+  });
+
+
+  // document.addEventListener('DOMContentLoaded', () => {
+  //   alert("hello");
+  //   let cartCount = 0;
+  //   const cartCountElement = document.getElementById('cart-count');
+  //   const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
+  //   alert(addToCartButtons);
+  //   addToCartButtons.forEach(button => {
+  //     button.addEventListener('click', (event) => {
+  //       event.preventDefault();
+  //       alert("hello");
+  //       var form_url = '<?php echo URLROOT; ?>/menuController/menu';
+
+  //       const itemId = button.getAttribute('data-item-id');
+  //       const price = button.getAttribute('data-price');
+  //       // Add your cart functionality here
+  //       console.log('Item added to cart:', itemId, price);
+
+  //       var qty = 1; 
+
+  //       $.ajax({
+  //         url: '<?php echo URLROOT; ?>/cartController/addToCart',
+  //         method: 'POST',
+  //         data: {
+  //           item_id: itemId,
+  //           qty: qty,
+  //           price: price
+  //         },
+  //         success: function(response) {
+  //           cartCountElement.textContent = response;
+  //           // $('#cart-count').text(response);
+  //         }
+  //       });
+
+  //       //cartCountElement.textContent = cartCount;
+  //     });
+  //   });
+  // });
 </script>
 

@@ -5,6 +5,7 @@ class MenuModel
     // Access Modifier = public, private, protected
     private $id;
     private $name;
+    private $quantity;
     private $category_id;
     private $description;
     private $price;
@@ -28,6 +29,14 @@ class MenuModel
     public function getName()
     {
         return $this->name;
+    }
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+    }
+    public function getQuantity()
+    {
+        return $this->quantity;
     }
     public function setCategoryId($category_id)
     {
@@ -76,6 +85,7 @@ class MenuModel
     public function toArray() {
         return [        
             "name" => $this->getName(),
+            "quantity" => $this->getQuantity(),
             "category_id" => $this->getCategoryId(),
             "description" => $this->getDescription(),
             "price" => $this->getPrice(),

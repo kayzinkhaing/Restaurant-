@@ -79,7 +79,6 @@ class orderController extends Controller
                 $order->setQuantity($quantity);
                 $order->setTotalAmount($totalAmount);
                 $order->setStatus($status);
-                $order->setSeatId($seat_id);
                 
                 // Update the order in the database
                 $updateOrder = $this->db->update('orders', $order->getId(), $order->toArray());

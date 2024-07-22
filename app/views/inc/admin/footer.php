@@ -21,7 +21,7 @@
     <script src="<?php echo URLROOT; ?>/js/admin/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="<?php echo URLROOT; ?>/js/admin/Chart.min.js"></script>
+    <!-- <script src="<?//php echo URLROOT; ?>/js/admin/Chart.min.js"></script> -->
 
     <!-- Page level custom scripts -->
     <script src="<?php echo URLROOT; ?>/js/admin/chart-area-demo.js"></script>

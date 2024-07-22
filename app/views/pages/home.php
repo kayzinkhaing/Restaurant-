@@ -13,7 +13,7 @@
         <h1 data-aos="fade-up">Enjoy Your Healthy Delicious Food</h1>
         <p data-aos="fade-up" data-aos-delay="100">What do you want to eat today ?.</p>
         <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-          <a href="<?php echo URLROOT;?>/Pages/book" class="btn-get-started">Booka a Table</a>
+          <!-- <a href="<?php //echo URLROOT;?>/Pages/book" class="btn-get-started">Booka a Table</a> -->
           <a href="https://youtu.be/7EdpBH81XIY?si=NJKWrCVd14Gjys8I" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
         </div>
       </div>
@@ -65,7 +65,6 @@
                             <i class="fas fa-cart-plus"></i> 
                         </button>
                     </div>
-
                       </div>
                     </div>
                   </div>
@@ -79,92 +78,71 @@
   </div>
 </section><!-- /Menu Section -->
 
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery section light-background">
 
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Gallery</h2>
+        <p><span>Check</span> <span class="description-title">Our Gallery</span></p>
+      </div><!-- End Section Title -->
 
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-<!-- Gallery Section -->
-<section id="gallery" class="gallery section light-background">
-
-  <!-- Section Title -->
-  <div class="container section-title" data-aos="fade-up">
-    <h2>Gallery</h2>
-    <p><span>Check</span> <span class="description-title">Our Gallery</span></p>
-  </div><!-- End Section Title -->
-
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
-    <div class="row">
-      <?php
-      // Define gallery images array (replace with actual fetching logic)
-      $galleryImages = array(
-        'gallery-1.jpg',
-        'gallery-2.jpg',
-        'gallery-2.jpg',
-        'gallery-3.jpg',
-        'gallery-4.jpg',
-        'gallery-5.jpg',
-        'gallery-6.jpg',
-        'gallery-7.jpg',
-        'gallery-7.jpg',
-        'gallery-7.jpg',
-        'gallery-7.jpg',
-        'gallery-8.jpg'
-      );
-
-      // Loop through each gallery image
-      foreach ($galleryImages as $image):
-      ?>
-        <div class="col-md-2">
-          <a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT; ?>/public/images/gallery/<?php echo $image; ?>">
-            <img src="<?php echo URLROOT; ?>/public/images/gallery/<?php echo $image; ?>" class="img-fluid" alt="">
-          </a>
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "centeredSlides": true,
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              },
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 1,
+                  "spaceBetween": 0
+                },
+                "768": {
+                  "slidesPerView": 3,
+                  "spaceBetween": 20
+                },
+                "1200": {
+                  "slidesPerView": 5,
+                  "spaceBetween": 20
+                }
+              }
+            }
+          </script>
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-1.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-1.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-2.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-2.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-3.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-3.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-4.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-4.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-5.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-5.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-6.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-6.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-7.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-7.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-8.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-8.jpg" class="img-fluid" alt=""></a></div>
+          </div>
+          <div class="swiper-pagination"></div>
         </div>
-        
-      <?php endforeach; ?>
-      <div class="swiper-pagination"></div>
-    </div>
-  </div>
 
-</section><!-- /Gallery Section -->
+      </div>
+
+    </section><!-- /Gallery Section -->
 
 
-<!-- JavaScript for Gallery Navigation -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const galleryContainer = document.querySelector('.gallery-container');
-  const galleryImages = document.querySelector('.gallery-images');
-
-  let scrollAmount = 0;
-
-  // Left arrow key
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'ArrowLeft') {
-      scrollAmount = Math.max(scrollAmount - 300, 0);
-      galleryContainer.scrollTo({
-        top: 0,
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  });
-
-  // Right arrow key
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'ArrowRight') {
-      scrollAmount = Math.min(scrollAmount + 300, galleryImages.scrollWidth - galleryContainer.clientWidth);
-      galleryContainer.scrollTo({
-        top: 0,
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  });
-});
-</script>
 
 
 
       <!-- Why Us Section -->
-      <section id="why-us" class="why-us section light-background">
+<section id="why-us" class="why-us section light-background">
 
 <div class="container">
 
@@ -194,24 +172,24 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="col-xl-4">
           <div class="icon-box d-flex flex-column justify-content-center align-items-center">
             <i class="bi bi-clipboard-data"></i>
-            <h4>Corporis voluptates officia eiusmod</h4>
-            <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+            <h4>Exceptional Quality</h4>
+            <p>We are committed to providing the highest quality ingredients and dishes, ensuring that every meal is a culinary delight.</p>
           </div>
         </div><!-- End Icon Box -->
 
         <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
           <div class="icon-box d-flex flex-column justify-content-center align-items-center">
             <i class="bi bi-gem"></i>
-            <h4>Ullamco laboris ladore lore pan</h4>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+            <h4>Outstanding Service</h4>
+              <p>Our friendly and attentive staff are dedicated to making your dining experience memorable and enjoyable from start to finish.</p>
           </div>
         </div><!-- End Icon Box -->
 
         <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
           <div class="icon-box d-flex flex-column justify-content-center align-items-center">
             <i class="bi bi-inboxes"></i>
-            <h4>Labore consequatur incidid dolore</h4>
-            <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+            <h4>Comfortable Ambiance</h4>
+                <p>We offer a warm and inviting atmosphere that is perfect for both casual dining and special occasions, making you feel right at home.</p>
           </div>
         </div><!-- End Icon Box -->
 
