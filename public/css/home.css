@@ -1,3 +1,32 @@
+
+                    .custom-btn {
+            background-color: #ffcc00; /* Replace with your desired background color */
+            color: #000; /* Text color for the button */
+            border: none; /* Remove default border */
+        }
+
+        .custom-select {
+            background-color: #ffcc00; /* Replace with your desired background color */
+            color: #000; /* Text color for the select */
+            border: none; /* Remove default border */
+            padding: 0.375rem 1.75rem; /* Adjust padding to match button size */
+            height: calc(1.5em + 0.75rem + 2px); /* Adjust height to match button size */
+        }
+
+        .custom-input {
+            margin-left: 10px; /* Add space between select and input */
+        }
+        .btn-add-to-cart {
+    background-color: transparent;
+    border: none; /* Optional: If you also want to remove the border */
+    color: #000;  /* Set the text color */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    padding: 0; /* Optional: Adjust padding as needed */
+}
+
+.btn-add-to-cart:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Optional: Add hover effect */
+}
 /* General Styles for Sections */
 .section {
     padding: 60px 0;

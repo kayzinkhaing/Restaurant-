@@ -15,6 +15,7 @@
         <div class="input-group-append">
             <button class="btn btn-custom" type="button">
                 <i class="fas fa-search fa-sm"></i>
+                
             </button>
         </div>
     </div>

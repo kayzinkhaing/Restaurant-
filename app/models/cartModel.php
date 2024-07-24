@@ -55,6 +55,7 @@ class CartModel
     public function toArray()
     {
         return [
+            "id" => $this->getId(),
             "user_id" => $this->getUserId(),
             "item_id" => $this->getItemId(),
             "quantity" => $this->getQty(),

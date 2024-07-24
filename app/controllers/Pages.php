@@ -43,6 +43,10 @@ class Pages extends Controller
     {
         $this->view('pages/cart');
     }
+    public function success()
+    {
+        $this->view('pages/success');
+    }
     public function book()
     {
         $this->view('pages/booking');

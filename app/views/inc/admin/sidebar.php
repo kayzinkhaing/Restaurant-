@@ -57,7 +57,7 @@
 
     <!-- Nav Item - Orders -->
     <li class="nav-item">
-        <a class="nav-link animated" href="<?php echo URLROOT; ?>/orderController/index">
+        <a class="nav-link animated" href="<?php echo URLROOT; ?>/cartController/orderView">
             <i class="fa-solid fa-cart-plus"></i>
             <span>Orders</span>
         </a>

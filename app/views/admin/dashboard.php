@@ -77,7 +77,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                <a href="<?php echo URLROOT; ?>/ordercontroller/index"> Orders</a>
+                                <a href="<?php echo URLROOT; ?>/cartController/orderView"> Orders</a>
 
                                 </div>
                                 <div class="row no-gutters align-items-center">

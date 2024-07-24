@@ -1,6 +1,6 @@
-<?php require_once APPROOT . '/views/inc/admin/header.php' ?>
-<?php require_once APPROOT . '/views/inc/admin/sidebar.php' ?>
-<?php require_once APPROOT . '/views/inc/admin/navbar.php' ?>
+<?php require_once APPROOT . '/views/inc/admin/header.php'; ?>
+<?php require_once APPROOT . '/views/inc/admin/sidebar.php'; ?>
+<?php require_once APPROOT . '/views/inc/admin/navbar.php'; ?>
 <?php require APPROOT . '/views/components/auth_message.php'; ?>
 
 <?php 
@@ -45,14 +45,20 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group has-danger">
-                                <label class="control-label">Image</label>
-                                <input type="file" name="image" class="form-control" >
-                                <input type="text" name="imagepath" id="filePath" class="form-control" value="<?php echo $data['menus']['image']; ?>" readonly>
+                            <div class="form-group">
+                                <label class="control-label">Quantity</label>
+                                <input type="number" name="quantity" class="form-control" placeholder="Quantity" value="<?php echo $data['menus']['quantity']; ?>">
                             </div>
                         </div>
                     </div>
                     <div class="row p-t-20">
+                        <div class="col-md-6">
+                            <div class="form-group has-danger">
+                                <label class="control-label">Image</label>
+                                <input type="file" name="image" class="form-control">
+                                <input type="text" name="imagepath" id="filePath" class="form-control" value="<?php echo $data['menus']['image']; ?>" readonly>
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Description</label>
@@ -70,4 +76,4 @@
     </div>
 </div>
 
-<?php require_once APPROOT . '/views/inc/admin/footer.php' ?>
+<?php require_once APPROOT . '/views/inc/admin/footer.php'; ?>

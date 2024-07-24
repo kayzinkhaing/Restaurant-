@@ -1,5 +1,6 @@
+
 <?php
- require_once APPROOT . '/views/inc/user/header.php'; 
+//require_once APPROOT . '/views/inc/user/header.php'; 
 //for user login and logout
 
 class Auth extends Controller
@@ -9,6 +10,9 @@ class Auth extends Controller
     {
         $this->model('UserModel');
         $this->db = new Database();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
     }
 
     public function formRegister()

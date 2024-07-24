@@ -97,6 +97,23 @@ class Database
         return ($success);
     }
 
+    public function deleteByUserId($table, $conditions)
+{
+    $conditionString = implode(' AND ', array_map(function($key) {
+        return "$key = :$key";
+    }, array_keys($conditions)));
+
+    $sql = "DELETE FROM $table WHERE $conditionString";
+    $stmt = $this->pdo->prepare($sql);
+
+    foreach ($conditions as $key => $value) {
+        $stmt->bindValue(":$key", $value);
+    }
+
+    return $stmt->execute();
+}
+
+
     public function columnFilter($table, $column, $value)
     {
         // $sql = 'SELECT * FROM ' . $table . ' WHERE `' . $column . '` = :value';
@@ -179,6 +196,41 @@ class Database
             return false;
         }
     }
+    public function decreaseQuantity($userId, $itemId, $price)
+{
+    try {
+        $sql = "UPDATE cart 
+                SET quantity = quantity - 1, 
+                    total_amount = total_amount - :parsed_price 
+                WHERE user_id = :user_id AND item_id = :item_id AND quantity > 1";
+        
+        $stm = $this->pdo->prepare($sql);
+        $stm->bindValue(':parsed_price', $price, PDO::PARAM_STR);
+        $stm->bindValue(':user_id', $userId, PDO::PARAM_INT);
+        $stm->bindValue(':item_id', $itemId, PDO::PARAM_INT);
+        
+        $success = $stm->execute();
+        return $success;
+    } catch (Exception $e) {
+        echo($e->getMessage());
+        return false;
+    }
+}
+
+public function getCartQuantity($userId, $itemId)
+{
+    $sql = "SELECT quantity FROM cart WHERE user_id = :user_id AND item_id = :item_id";
+    $stm = $this->pdo->prepare($sql);
+    $stm->bindValue(':user_id', $userId, PDO::PARAM_INT);
+    $stm->bindValue(':item_id', $itemId, PDO::PARAM_INT);
+    $stm->execute();
+    $result = $stm->fetch(PDO::FETCH_ASSOC);
+    return $result ? (int) $result['quantity'] : 0;
+}
+
+
+
+
     
 
 
@@ -335,6 +387,28 @@ class Database
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
+    public function updateCartItemQuantity($menu_id, $quantity): bool {
+        $sql = 'UPDATE cart_view SET quantity = :quantity WHERE menu_id = :menu_id AND user_id = :user_id';
+    
+        try {
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindValue(':quantity', $quantity, PDO::PARAM_INT);
+            $stm->bindValue(':menu_id', $menu_id, PDO::PARAM_INT);
+            $stm->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+    
+            if ($stm->execute()) {
+                return true;
+            } else {
+                throw new Exception("Failed to update quantity for menu_id: $menu_id");
+            }
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+    
+
+    
+    
 
     // public function getQtyForEachItem(string $table, $column, $value): int
     // {

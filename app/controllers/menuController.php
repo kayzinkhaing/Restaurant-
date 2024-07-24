@@ -79,13 +79,14 @@ class menuController extends Controller
     
             $name = $_POST['name'];
             $categoryId = $_POST['category_id'];
+            $quantity = $_POST['quantity'];
             $description = $_POST['description'];
             $price = $_POST['price'];
             $image = $_FILES['image']['name'];
             $msg = "";
     
             // Check for required fields
-            if (empty($name) || empty($categoryId) || empty($description) || empty($price) || empty($image)) {
+            if (empty($name) || empty($categoryId) || empty($quantity) || empty($description) || empty($price) || empty($image)) {
                 setMessage('error', 'All fields are required!');
                 redirect('menuController/create');
                 return;
@@ -108,6 +109,7 @@ class menuController extends Controller
             $menu = new MenuModel();
             $menu->setName($name);
             $menu->setCategoryId($categoryId);
+            $menu->setQuantity($quantity);
             $menu->setDescription($description);
             $menu->setPrice($price);
             $menu->setImage($image);
@@ -151,10 +153,11 @@ public function update()
         //exit;
         // Check if 'id' and other required fields are set in the POST request
         // && isset($_FILES['image']['name']);
-        if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['category_id']) && isset($_POST['description']) && isset($_POST['price'])) {
+        if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['quantity']) && isset($_POST['category_id']) && isset($_POST['description']) && isset($_POST['price'])) {
 
             $id = $_POST['id'];
             $name = $_POST['name'];
+            $quantity = $_POST['quantity'];
             $category_id = $_POST['category_id'];
             $description = $_POST['description'];
             $price = $_POST['price'];
@@ -183,7 +186,8 @@ public function update()
             $menus = new MenuModel();
             $menus->setId($id);
             $menus->setName($name);
-            $menus->setCategoryId($category_id);
+            $menus->setQuantity($quantity);
+            $menus->setCategoryId($quantity);
             $menus->setDescription($description);
             $menus->setPrice($price);
             // $menus->setDate($date);

@@ -38,12 +38,23 @@
             <?php else: ?>
                 <a class="btn-getstarted" href="<?php echo URLROOT; ?>/auth/login">Login</a>
             <?php endif; ?>
-            
     </div>
   </header>
 </body>
 </html>
+<style>.cart-count {
+    color: red; /* Sets the color of the text to red */
+}
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var cartCount = document.getElementById('cart-count');
+    if (cartCount.textContent === '0') {
+        cartCount.style.color = 'red';
+    }
+});
 
+</script>
 <script type="text/javascript">
   $(document).ready(function() { 
     const cartCountElement = document.getElementById('cart-count');

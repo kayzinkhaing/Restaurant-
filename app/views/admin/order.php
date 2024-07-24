@@ -21,30 +21,23 @@
                                          <th>Name</th>
                                          <th>Item Name</th>
                                          <th>Quantity</th>
+                                         <th>Price</th>
                                          <th>Total Amount</th>
-                                         <th>Status</th>                                                
-                                         <th>Reg-Date</th>
-                                         <th>Action</th>
                                         </tr>
                                   </thead>
                                   <tbody>
-                                  <?php foreach ($data['orders'] as $order){ ?>
-                                               <tr>
-                                                    <td><?php echo $order['id']; ?> </td>
-                                                    <td><?php echo $order['user_id']; ?> </td>
-                                                    <td><?php echo $order['item_id']; ?> </td>
-                                                    <td><?php echo $order['Quantity']; ?> </td>
-                                                    <td><?php echo $order['total_amount']; ?> </td>
-                                                    <td><?php echo $order['Status']; ?> </td>
-                                                    <td><?php echo $order['Reg_Date']; ?> </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal_<?php echo $order['id']; ?>">
-                                                            Delete
-                                                        </button>
-                                                    </td>
-                                               </tr>
-                                        <?php } ?>
-                                  
+                                  <?php 
+                                $number=1;
+                                foreach ($data['cart'] as $cart) { ?>
+                                    <tr>
+                                        <td><?php echo $number++; ?></td>
+                                        <td><?php echo $cart['user_name']; ?></td>
+                                        <td><?php echo $cart['menu_name']; ?></td>
+                                        <td><?php echo $cart['quantity']; ?></td>
+                                        <td><?php echo $cart['sale_price']; ?></td>
+                                        <td><?php echo $cart['total_amount']; ?></td>
+                                    </tr>
+                                <?php } ?>
                                   </tbody>
                               </table>
                           </div>

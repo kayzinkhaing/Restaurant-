@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+
+
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +22,9 @@
          <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet"> -->
+
+
 
   <!-- Vendor CSS Files -->
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/bootstrap/css/bootstrap.min.css">
@@ -32,7 +40,6 @@
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/contact.css">
   <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/home.css"> -->
 
-
     <!-- <link rel="icon" href="<?php echo URLROOT; ?>/images/icons/invoice_logo.png "> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -45,8 +52,8 @@
 
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/styles.css">
     <script src="<?php echo URLROOT; ?>/js/bootstrap.min.js"></script>
-
-
+    
+    
     <title><?php echo SITENAME; ?></title>
     <style>
         body {

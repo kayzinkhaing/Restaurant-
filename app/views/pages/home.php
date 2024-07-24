@@ -44,7 +44,7 @@
         // Slice the array to get only the first six items
         $menus = array_slice($menus, 0, 8);
         ?>
-         <form action='<?php echo URLROOT; ?>/employeeController/store' method='post'>
+         <!-- <form action='<?php //echo URLROOT; ?>/employeeController/store' method='post'> -->
         <div class="row">
           
           <?php foreach ($menus as $menu): ?>
@@ -60,82 +60,153 @@
                         <p class="card-text"><?php echo $menu['price']." MMK"; ?></p>
                       </div>
                       <div class="col-4 text-right">
-                      <div class="col-4 text-right">
-                        <button type="submit" class="btn btn-add-to-cart">
-                            <i class="fas fa-cart-plus"></i> 
-                        </button>
-                    </div>
-                      </div>
+                              <button class="btn btn-primary btn-add-to-cart" 
+                              data-user-id="<?= $_SESSION['user_id'] ?? 0 ?>" data-item-id="<?= $menu['id'] ?>" data-price="<?= $menu['price'] ?>">
+                                  <i class="fas fa-cart-plus"></i>
+                              </button>
+                        </div>
                     </div>
                   </div>
               </div>
             </div>
           <?php endforeach; ?>
         </div>
-        </form>
       </div>
     </div>
   </div>
 </section><!-- /Menu Section -->
+<style>
+  .image-row-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery section light-background">
+.image-row {
+  display: flex;
+  overflow-x: auto; /* Allows horizontal scrolling */
+  scroll-behavior: smooth; /* Smooth scrolling when using buttons */
+  white-space: nowrap; /* Prevents wrapping of images */
+  width: calc(100% - 80px); /* Adjust based on arrow button width */
+  margin: 0 10px; /* Space around image row */
+}
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Gallery</h2>
-        <p><span>Check</span> <span class="description-title">Our Gallery</span></p>
-      </div><!-- End Section Title -->
+.image-item {
+  display: inline-block;
+  margin-right: 20px; /* Space between images */
+  transition: transform 0.5s ease; /* Smooth transformation on hover */
+}
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+.image-item:hover {
+  animation: shake 0.5s ease; /* Shaking effect on hover */
+}
 
-        <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "centeredSlides": true,
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 1,
-                  "spaceBetween": 0
-                },
-                "768": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 20
-                },
-                "1200": {
-                  "slidesPerView": 5,
-                  "spaceBetween": 20
-                }
-              }
-            }
-          </script>
-          <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-1.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-1.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-2.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-2.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-3.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-3.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-4.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-4.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-5.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-5.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-6.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-6.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-7.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-7.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?php echo URLROOT;?>/images/gallery/gallery-8.jpg"><img src="<?php echo URLROOT;?>/images/gallery/gallery-8.jpg" class="img-fluid" alt=""></a></div>
-          </div>
-          <div class="swiper-pagination"></div>
+.image-item img {
+  border-radius: 50%; /* Makes the image circular */
+  width: 100px; /* Set your desired size */
+  height: 100px; /* Set your desired size */
+  object-fit: cover; /* Ensures the image covers the circle without distortion */
+  border: 2px solid #fff; /* Optional: adds a border around the circle */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.image-item img:hover {
+  transform: scale(1.1); /* Zoom effect on hover */
+}
+
+.arrow-button {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left-arrow {
+  left: 0;
+}
+
+.right-arrow {
+  right: 0;
+}
+
+.arrow-button:focus {
+  outline: none; /* Removes outline on focus */
+}
+
+.arrow-button:hover {
+  background-color: rgba(0, 0, 0, 0.7); /* Darker background on hover */
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const imageRow = document.getElementById('imageRow');
+    const leftArrow = document.getElementById('leftArrow');
+    const rightArrow = document.getElementById('rightArrow');
+
+    leftArrow.addEventListener('click', function () {
+      imageRow.scrollBy({ left: -150, behavior: 'smooth' });
+    });
+
+    rightArrow.addEventListener('click', function () {
+      imageRow.scrollBy({ left: 150, behavior: 'smooth' });
+    });
+  });
+</script>
+
+<!-- Gallery Section -->
+<section id="gallery" class="gallery section light-background">
+
+  <!-- Section Title -->
+  <div class="container section-title">
+    <h2>Gallery</h2>
+    <p><span>Check</span> <span class="description-title">Our Gallery</span></p>
+  </div><!-- End Section Title -->
+
+  <div class="container">
+    
+        <?php
+        $images = [
+            "gallery-1.jpg",
+            "gallery-2.jpg",
+            "gallery-3.jpg",
+            "gallery-4.jpg",
+            "gallery-5.jpg",
+            "gallery-6.jpg",
+            "gallery-7.jpg",
+            "gallery-8.jpg"
+        ];
+        foreach ($images as $image): ?>
+        <div class="image-item">
+          <a href="<?php echo URLROOT . '/images/gallery/' . $image; ?>">
+            <img src="<?php echo URLROOT . '/images/gallery/' . $image; ?>" class="img-fluid" alt="">
+          </a>
         </div>
+        <?php endforeach; ?>
+    
+  </div>
 
-      </div>
+</section><!-- /Gallery Section -->
 
-    </section><!-- /Gallery Section -->
 
 
 
@@ -203,7 +274,127 @@
 </section><!-- /Why Us Section -->
 
   </main>
+<style>
+    .btn-add-to-cart {
+    background-color: transparent;
+    border: none; /* Optional: If you also want to remove the border */
+    color: #000;  /* Set the text color */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    padding: 0;}
+</style>
   
   <?php require_once APPROOT . '/views/inc/user/footer.php' ?>
-
   
+  <script type="text/javascript">
+  $(document).ready(function() {
+    const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
+    addToCartButtons.forEach(button => { 
+      var itemId = button.getAttribute('data-item-id');
+      $.ajax({
+            url: '<?php echo URLROOT; ?>/cartController/getQtyForEachItem', // Adjust the URL to your cartController's endpoint
+            type: 'POST',
+            data: {
+              item_id: itemId
+            },
+            success: function(response) { 
+              if (response.trim() === "disabled") {
+                    button.disabled = true;
+                }
+              //  $('#cart-count').text(response);
+            },
+            error: function(xhr, status, error) {
+                // Handle any errors
+                alert('An error occurred while adding the item to the cart.');
+            }
+        });
+    });
+    $(document).on('click', '.btn-add-to-cart', function() {
+        var itemId = $(this).data('item-id');
+        var userId = $(this).data('user-id');
+        var price = $(this).data('price');
+        var qty = 1; 
+        var url = '<?php echo URLROOT; ?>/cartController/addToCart';
+        
+        if (userId == 0) {
+            // Redirect to login page if the user is not logged in
+            window.location.href = '<?php echo URLROOT; ?>/Auth/login';
+            return; // Exit the function
+        }
+        // You can now send an AJAX request to add this item to the cart
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+              item_id: itemId,
+              qty: qty,
+              price: price
+            },
+            success: function(response) {
+               $('#cart-count').text(response);
+            },
+            error: function(xhr, status, error) {
+                // Handle any errors
+                alert('An error occurred while adding the item to the cart.');
+            }
+        });
+    });
+
+
+    $('#category_id').on('change', function() {
+      $('#allmenu').hide();
+      var categoryId = $(this).val();
+      //alert(categoryId);  // This line is just for debugging, you can remove it later.
+      var form_url = '<?php echo URLROOT; ?>/menuController/menu';
+
+      $.ajax({
+        url: form_url,
+        type: 'GET',
+        data: {
+          category_id: categoryId
+        }, // Pass category_id directly
+        success: function(response) {
+
+          $('#name').empty();
+          $('#name').append(response);
+        }
+      });
+    });
+  });
+
+  //   alert("hello");
+  //   let cartCount = 0;
+  //   const cartCountElement = document.getElementById('cart-count');
+  //   const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
+  //   alert(addToCartButtons);
+  //   addToCartButtons.forEach(button => {
+  //     button.addEventListener('click', (event) => {
+  //       event.preventDefault();
+  //       alert("hello");
+  //       var form_url = '<?php echo URLROOT; ?>/menuController/menu';
+
+  //       const itemId = button.getAttribute('data-item-id');
+  //       const price = button.getAttribute('data-price');
+  //       // Add your cart functionality here
+  //       console.log('Item added to cart:', itemId, price);
+
+  //       var qty = 1; 
+
+  //       $.ajax({
+  //         url: '<?php echo URLROOT; ?>/cartController/addToCart',
+  //         method: 'POST',
+  //         data: {
+  //           item_id: itemId,
+  //           qty: qty,
+  //           price: price
+  //         },
+  //         success: function(response) {
+  //           cartCountElement.textContent = response;
+  //           // $('#cart-count').text(response);
+  //         }
+  //       });
+
+  //       //cartCountElement.textContent = cartCount;
+  //     });
+  //   });
+  // });
+</script>

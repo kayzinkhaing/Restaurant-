@@ -109,11 +109,13 @@
     const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
     addToCartButtons.forEach(button => { 
       var itemId = button.getAttribute('data-item-id');
+      var userId = button.getAttribute('data-user-id');
       $.ajax({
             url: '<?php echo URLROOT; ?>/cartController/getQtyForEachItem', // Adjust the URL to your cartController's endpoint
             type: 'POST',
             data: {
-              item_id: itemId
+              item_id: itemId,
+              user_id:userId,
             },
             success: function(response) { 
               if (response.trim() === "disabled") {
@@ -219,4 +221,3 @@
   //   });
   // });
 </script>
-

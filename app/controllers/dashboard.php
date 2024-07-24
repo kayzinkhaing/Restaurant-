@@ -20,7 +20,7 @@ class dashboard extends Controller
     $menu = $this->db->getTotalCount('view_menu');
     $category = $this->db->getTotalCount('category');
     $users = $this->db->getTotalCount('users');
-    $order = $this->db->getTotalCount('order'); // Include the order count
+    $order = $this->db->getTotalCount('cart_view'); // Include the order count
     // $seat = $this->db->getTotalCount('seat'); // Include the order count
 
     $data = [

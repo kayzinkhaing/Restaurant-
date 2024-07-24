@@ -9,7 +9,7 @@
 <div class="col-lg-12">
     <div class="card card-outline-primary">
         <div class="card-header">
-            <h4 class="text-primary">Add Menu</h4>
+        <h4 class="text-primary">Add Menu</h4>
         </div>
         <div class="card-body">
             <form action='<?php echo URLROOT; ?>/menuController/store' method='post' enctype="multipart/form-data">
@@ -37,26 +37,20 @@
                     </div>
 
                     <div class="row p-t-20">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Quantity</label>
                                 <input type="number" name="quantity" class="form-control" >
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Price</label>
                                 <input type="number" name="price" class="form-control" placeholder="MMK" >
                             </div>
                         </div>
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="control-label">Image</label>
-                                <input type="file" name="image" class="form-control" accept="image/*" >
-                            </div>
-                        </div> 
                     </div>
 
                     <div class="row p-t-20">
@@ -66,6 +60,13 @@
                                 <textarea name="description" id="description" class="form-control" ></textarea>
                             </div>
                         </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Image</label>
+                                <input type="file" name="image" class="form-control" accept="image/*" >
+                            </div>
+                        </div> 
                     </div>
 
                     <div class="form-actions">

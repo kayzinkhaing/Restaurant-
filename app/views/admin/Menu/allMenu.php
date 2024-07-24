@@ -22,6 +22,7 @@
                                         <th>Id</th>
                                         <th>Image</th>
                                         <th>Name</th>
+                                        <th>Available Qty</th>
                                         <th>Category</th>
                                         <th>Price</th>
                                         <th>Description</th>
@@ -33,13 +34,12 @@
                                 $number=1;
                                 foreach ($data['menus'] as $menu): ?>
                                     <tr>
-
-                                        <!-- <td><?php echo $menu['id']; ?></td> -->
                                         <td><?php echo $number++; ?></td>
                                         <td>
                                             <img src="<?php echo URLROOT; ?>/public/food_images/<?php echo $menu['image']; ?>" alt="food image" width="70px">
                                         </td>
                                         <td><?php echo $menu['name']; ?></td>
+                                        <td><?php echo $menu['quantity']; ?></td>
                                         <td><?php echo $menu['category_name']; ?></td>
                                         <td><?php echo $menu['price']; ?> MMK</td>
                                         <td><?php echo $menu['description']; ?></td>
@@ -78,7 +78,7 @@
             </div>
             <div class="modal-footer">
                 <a href="<?php echo URLROOT; ?>/menuController/destroy/<?php echo $menu['id']; ?>" class="btn btn-danger">Delete</a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a href="<?php echo URLROOT; ?>/menuController/index ?>"button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</a>
             </div>
         </div>
     </div>
