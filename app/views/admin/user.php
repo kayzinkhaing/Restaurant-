@@ -39,10 +39,10 @@
                                                     <td><?php echo $user['profile_image']; ?> </td>
                                                     <td><?php echo $user['role']; ?> </td>
                                                     <td>
-    <a href="#" class="text-danger" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="modal" data-target="#deleteModal_<?php echo $menu['id']; ?>" title="Delete">
-        <i class="fas fa-trash-alt fa-lg"></i>
-    </a>
-</td>
+                                                    <a href="#" class="text-danger" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="modal" data-target="#deleteModal_<?php echo $menu['id']; ?>" title="Delete">
+                                                    <i class="uil uil-trash"></i>
+                                                    </a>
+                                                </td>
 
                                                     <?php }?>
                                     </table>

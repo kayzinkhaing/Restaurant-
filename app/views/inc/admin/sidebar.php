@@ -13,7 +13,7 @@
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
         <a class="nav-link animated" href="<?php echo URLROOT;?>/dashboard/admin">
-        <i class="fi fi-rr-dashboard-monitor"></i>
+        <i class="uil uil-dashboard"></i>
 
             <span>Dashboard</span>
         </a>
@@ -28,7 +28,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed animated" href="<?php echo URLROOT; ?>/menuController/index" data-toggle="collapse" data-target="#collapseMenu"
             aria-expanded="true" aria-controls="collapseMenu">
-            <i class="fa-solid fa-bowl-food"></i>
+            <i class="uil uil-chart-pie-alt"></i>
             <span>Menu</span>
         </a>
         <div id="collapseMenu" class="collapse" aria-labelledby="headingMenu" data-parent="#accordionSidebar">
@@ -43,7 +43,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed animated" href="<?php echo URLROOT; ?>/categoryController/index" data-toggle="collapse" data-target="#collapseCategory"
             aria-expanded="true" aria-controls="collapseCategory">
-            <i class="fa-solid fa-book"></i>
+            <i class="uil uil-restaurant"></i>
             <span>Category</span>
         </a>
         <div id="collapseCategory" class="collapse" aria-labelledby="headingCategory"
@@ -57,72 +57,42 @@
 
     <!-- Nav Item - Orders -->
     <li class="nav-item">
-        <a class="nav-link animated" href="<?php echo URLROOT; ?>/cartController/orderView">
-            <i class="fa-solid fa-cart-plus"></i>
+        <a class="nav-link animated" href="<?php echo URLROOT; ?>/orderController/index">
+        <i class="uil uil-th-large"></i>
             <span>Orders</span>
         </a>
     </li>
 
-    <!-- Nav Item - Tables -->
-    <!-- <li class="nav-item">
-        <a class="nav-link collapsed animated" href="<?php echo URLROOT; ?>/tableController" data-toggle="collapse" data-target="#collapseTables"
-            aria-expanded="true" aria-controls="collapseTables">
-            <i class="fa-solid fa-table"></i>
-            <span>Tables</span>
-        </a>
-        <div id="collapseTables" class="collapse" aria-labelledby="headingTables" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <!-- <a class="collapse-item" href="<?php //echo URLROOT; ?>/tableController/index">All Tables</a> -->
-                <!-- <a class="collapse-item" href="<?php //echo URLROOT; ?>/tableController/create">Add Table</a> -->
-            <!-- </div>
-        </div>
-    </li>  -->
 
     <!-- Nav Item - Users -->
     <li class="nav-item">
         <a class="nav-link animated" href="<?php echo URLROOT; ?>/userController/user">
-            <i class="fa-solid fa-user-secret"></i>
+        <i class="uil uil-user-circle"></i>
             <span>Users</span>
         </a>
     </li>
 
-    <!-- Nav Item - Employees -->
-    <!-- <li class="nav-item">
-        <a class="nav-link collapsed animated" href="<?php echo URLROOT; ?>/employeeController" data-toggle="collapse" data-target="#collapseEmployees"
-            aria-expanded="true" aria-controls="collapseEmployees">
-            <i class="fa-solid fa-user-tie"></i>
-            <span>Employees</span>
-        </a>
-        <div id="collapseEmployees" class="collapse" aria-labelledby="headingEmployees"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?php echo URLROOT; ?>/employeeController/index">All Employees</a>
-                <a class="collapse-item" href="<?php echo URLROOT;?>/employeeController/create">Add Employee</a>
-                <a class="collapse-item" href="<?php echo URLROOT;?>/positionController/index">All Position</a>
-                <a class="collapse-item" href="<?php echo URLROOT;?>/positionController/create">Add Position</a>
-            </div>
-        </div>
-    </li> -->
-
+  
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- Nav Item - Settings -->
-    <li class="nav-item">
-        <a class="nav-link collapsed animated" href="<?php echo URLROOT;?>/controllers/" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-cog"></i>
-            <span>Setting</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <!-- <a class="collapse-item" href="login.html">About Us</a> -->
-                <a class="collapse-item" href="<?php echo URLROOT;?>/contactController/index">Contact Us</a>
-                <a class="collapse-item" href="<?php echo URLROOT;?>/controllers/Pages/login">Logout</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            </div>
+<!-- Nav Item - Settings -->
+<li class="nav-item">
+    <a class="nav-link collapsed animated" href="<?php echo URLROOT;?>/controllers/" data-toggle="collapse" data-target="#collapsePages"
+        aria-expanded="true" aria-controls="collapsePages">
+        <i class="uil uil-cog"></i>
+        <span>Setting</span>
+    </a>
+    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <!-- <a class="collapse-item" href="login.html">About Us</a> -->
+            <!-- <a class="collapse-item" href="<?php //echo URLROOT;?>/contactController/index">Contact Us</a> -->
+            <a class="collapse-item" href="<?php echo URLROOT;?>/controllers/Pages/login">Logout</a>
+            <!-- <a class="collapse-item" href="forgot-password.html">Forgot Password</a> -->
         </div>
-    </li>
+    </div>
+</li>
+
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

@@ -19,23 +19,21 @@
                                       <tr>
                                          <th>Id</th>
                                          <th>Name</th>
-                                         <th>Item Name</th>
+                                         <th>Menu Name</th>
                                          <th>Quantity</th>
-                                         <th>Price</th>
                                          <th>Total Amount</th>
                                         </tr>
                                   </thead>
                                   <tbody>
                                   <?php 
                                 $number=1;
-                                foreach ($data['cart'] as $cart) { ?>
+                                foreach ($data['order'] as $order) { ?>
                                     <tr>
                                         <td><?php echo $number++; ?></td>
-                                        <td><?php echo $cart['user_name']; ?></td>
-                                        <td><?php echo $cart['menu_name']; ?></td>
-                                        <td><?php echo $cart['quantity']; ?></td>
-                                        <td><?php echo $cart['sale_price']; ?></td>
-                                        <td><?php echo $cart['total_amount']; ?></td>
+                                        <td><?php echo $order['user_name']; ?></td>
+                                        <td><?php echo $order['menu_name']; ?></td>
+                                        <td><?php echo $order['quantity']; ?></td>
+                                        <td><?php echo $order['order_total_amount']; ?></td>
                                     </tr>
                                 <?php } ?>
                                   </tbody>

@@ -187,7 +187,7 @@ public function update()
             $menus->setId($id);
             $menus->setName($name);
             $menus->setQuantity($quantity);
-            $menus->setCategoryId($quantity);
+            $menus->setCategoryId($category_id);
             $menus->setDescription($description);
             $menus->setPrice($price);
             // $menus->setDate($date);

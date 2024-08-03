@@ -33,6 +33,9 @@ class Database
         }
     }
 
+    // public function lastInsertId() {
+    //     return $this->pdo->lastInsertId();
+    // }
     public function create($table, $data)
     {
         try {
@@ -96,22 +99,45 @@ class Database
         $success = $stm->execute();
         return ($success);
     }
+    public function updateMenuQuantity($menu_id, $quantity) {
+        // Check if the current quantity is greater than or equal to the quantity to be reduced
+        $checkSql = 'SELECT quantity FROM menu WHERE id = :menu_id';
+        $checkStm = $this->pdo->prepare($checkSql);
+        $checkStm->bindValue(':menu_id', $menu_id);
+        $checkStm->execute();
+        $currentQuantity = $checkStm->fetchColumn();
+    
+        if ($currentQuantity >= $quantity) {
+            // Update the quantity if the current quantity is greater than or equal to the quantity to be reduced
+            $updateSql = 'UPDATE menu SET quantity = quantity - :quantity WHERE id = :menu_id';
+            $updateStm = $this->pdo->prepare($updateSql);
+            $updateStm->bindValue(':quantity', $quantity);
+            $updateStm->bindValue(':menu_id', $menu_id);
+            $success = $updateStm->execute();
+            return $success;
+        } else {
+            // Return false if the quantity is not sufficient
+            return false;
+        }
+    }
+    
 
-    public function deleteByUserId($table, $conditions)
-{
-    $conditionString = implode(' AND ', array_map(function($key) {
-        return "$key = :$key";
-    }, array_keys($conditions)));
+        public function deleteByUserId($table, $conditions)
+    {
+        $conditionString = implode(' AND ', array_map(function($key) {
+            return "$key = :$key";
+        }, array_keys($conditions)));
 
-    $sql = "DELETE FROM $table WHERE $conditionString";
-    $stmt = $this->pdo->prepare($sql);
+        $sql = "DELETE FROM $table WHERE $conditionString";
+        $stmt = $this->pdo->prepare($sql);
 
-    foreach ($conditions as $key => $value) {
-        $stmt->bindValue(":$key", $value);
+        foreach ($conditions as $key => $value) {
+            $stmt->bindValue(":$key", $value);
+        }
+
+        return $stmt->execute();
     }
 
-    return $stmt->execute();
-}
 
 
     public function columnFilter($table, $column, $value)
@@ -405,11 +431,6 @@ public function getCartQuantity($userId, $itemId)
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-    
-
-    
-    
-
     // public function getQtyForEachItem(string $table, $column, $value): int
     // {
     //     $sql = 'SELECT SUM(`quantity`) as total FROM ' . $table . ' WHERE ' . $column . ' = :value';

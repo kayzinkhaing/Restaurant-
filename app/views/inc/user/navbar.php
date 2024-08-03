@@ -1,4 +1,8 @@
-
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 
   <header id="header" class="header d-flex align-items-center sticky-top" style="background-color: white;">
   <script src="<?php echo URLROOT; ?>/js/admin/jquery.min.js"></script>
@@ -19,7 +23,7 @@
           <li>
             <div class="icons">
                   <a href="<?php echo URLROOT; ?>/cartController/index" style="text-decoration: none; position: relative;">
-                      <i class="fas fa-shopping-cart"></i>
+                      <i class="uil uil-shopping-cart-alt"></i>
                       <span id="cart-count" class="cart-count">0</span>
                   </a>
               <a href="#" style="text-decoration: none;"><i class="fas fa-search"></i></a>

@@ -1,3 +1,6 @@
+
+
+
 <?php require_once APPROOT . '/views/inc/admin/header.php'; ?>
 <?php require_once APPROOT . '/views/inc/admin/sidebar.php'; ?>
 <?php require_once APPROOT . '/views/inc/admin/navbar.php'; ?>
@@ -45,10 +48,11 @@
                                         <td><?php echo $menu['description']; ?></td>
                                         <td>
                                             <a href="<?php echo URLROOT; ?>/menuController/edit/<?php echo $menu['id']; ?>" class="text-primary">
-                                                <i class="fas fa-edit fa-lg"></i>
+                                            <i class="uil uil-edit-alt"></i>
                                             </a>
                                             <a href="#" class="text-danger" data-toggle="modal" data-target="#deleteModal_<?php echo $menu['id']; ?>">
-                                                <i class="fas fa-trash-alt fa-lg"></i>
+                                            
+                                            <i class="uil uil-trash"></i>
                                             </a>
                                         </td>
                                     </tr>

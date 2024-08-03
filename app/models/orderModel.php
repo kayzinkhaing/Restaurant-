@@ -1,13 +1,10 @@
 <?php
 class OrderModel
-{					
+{
     private $id;
     private $user_id;
-    private $item_id;
-    private $Quantity;
-    private $total_amount;
-    private $Status;
-    private $Reg_Date;
+    private $totalQty;
+    private $totalAmount;
 
     // ID
     public function setId($id)
@@ -29,55 +26,24 @@ class OrderModel
         return $this->user_id;
     }
 
-    // Item ID
-    public function setItemId($item_id)
+    // Total Quantity
+    public function setTotalQty($totalQty)
     {
-        $this->item_id = $item_id;
+        $this->totalQty = $totalQty;
     }
-    public function getItemId()
+    public function getTotalQty()
     {
-        return $this->item_id;
-    }
-
-    // Quantity
-    public function setQuantity($Quantity)
-    {
-        $this->Quantity = $Quantity;
-    }
-    public function getQuantity()
-    {
-        return $this->Quantity;
+        return $this->totalQty;
     }
 
     // Total Amount
-    public function setTotalAmount($total_amount)
+    public function setTotalAmount($totalAmount)
     {
-        $this->total_amount = $total_amount;
+        $this->totalAmount = $totalAmount;
     }
     public function getTotalAmount()
     {
-        return $this->total_amount;
-    }
-
-
-    // Status
-    public function setStatus($Status)
-    {
-        $this->Status = $Status;
-    }
-    public function getStatus()
-    {
-        return $this->Status;
-    }
-
-    // Registration Date
-    public function setRegDate($Reg_Date)
-    {
-        $this->Reg_Date = $Reg_Date;
-    }
-    public function getRegDate()
-    {
-        return $this->Reg_Date;
+        return $this->totalAmount;
     }
 
     // Convert object properties to array
@@ -86,11 +52,8 @@ class OrderModel
         return [
             'id' => $this->getId(),
             'user_id' => $this->getUserId(),
-            'item_id' => $this->getItemId(),
-            'Quantity' => $this->getQuantity(),
-            'total_amount' => $this->getTotalAmount(),
-            'Status' => $this->getStatus(),
-            'Reg_Date' => $this->getRegDate()
+            'totalQty' => $this->getTotalQty(),
+            'totalAmount' => $this->getTotalAmount()
         ];
     }
 }

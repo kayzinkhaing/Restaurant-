@@ -1,8 +1,5 @@
-
 <?php require_once APPROOT . '/views/inc/user/header.php' ?>
 <?php require_once APPROOT . '/views/inc/user/navbar.php' ?>
-
-
 <main class="main">
 
 <!-- Hero Section -->
@@ -62,7 +59,7 @@
                       <div class="col-4 text-right">
                               <button class="btn btn-primary btn-add-to-cart" 
                               data-user-id="<?= $_SESSION['user_id'] ?? 0 ?>" data-item-id="<?= $menu['id'] ?>" data-price="<?= $menu['price'] ?>">
-                                  <i class="fas fa-cart-plus"></i>
+                                  <i class="uil uil-shopping-cart-alt"></i>
                               </button>
                         </div>
                     </div>
@@ -192,6 +189,8 @@
             "gallery-4.jpg",
             "gallery-5.jpg",
             "gallery-6.jpg",
+            "gallery-7.jpg",
+            "gallery-7.jpg",
             "gallery-7.jpg",
             "gallery-8.jpg"
         ];

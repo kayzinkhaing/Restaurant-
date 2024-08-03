@@ -31,10 +31,11 @@
                                         <td><?php echo $category['date']; ?></td>
                                         <td>
                                                 <a href="<?php echo URLROOT; ?>/categoryController/edit/<?php echo $category['id']; ?>" class="text-primary">
-                                                    <i class="fas fa-edit fa-lg"></i>
+                                                <i class="uil uil-edit-alt"></i>
                                                 </a>
                                                 <a href="#" data-toggle="modal" data-target="#deleteModal_<?php echo $category['id']; ?>" class="text-danger ml-2">
-                                                    <i class="fas fa-trash-alt fa-lg"></i>
+                                                
+                                                <i class="uil uil-trash"></i>
                                                 </a>
                                             </td>
 

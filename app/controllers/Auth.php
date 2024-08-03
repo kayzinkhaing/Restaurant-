@@ -125,13 +125,10 @@ public function login()
 {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-
         $email = $_POST['email'];
-        // echo($email);
-        // exit;
         $password = base64_encode($_POST['password']); // Encode password for comparison
-        // echo($password);
-        // exit;
+     
+    
 
         $user = $this->db->columnFilter('users', 'email', $email);
         // echo '<pre>';

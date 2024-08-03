@@ -6,9 +6,9 @@
     <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800" style="font-style: italic;">Dashboard</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
         <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-    </a>
+    </a> -->
 </div>
 
 
@@ -24,7 +24,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $data['menu']; ?></div>
                             </div>
                             <div class="col-auto">
-                            <i class="fas fa-utensils fa-2x text-gray-300"></i>
+                            <i class="uil uil-chart-pie-alt"></i>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $data['category']; ?></div>
                             </div>
                             <div class="col-auto">
-                            <i class="fas fa-list fa-2x text-gray-300"></i> <!-- Change this line -->
+                            <i class="uil uil-crockery"></i> <!-- Change this line -->
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $data['users']; ?></div>
                             </div>
                             <div class="col-auto">
-                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                            <i class="uil uil-user"></i>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                <a href="<?php echo URLROOT; ?>/cartController/orderView"> Orders</a>
+                                <a href="<?php echo URLROOT; ?>/orderController/index"> Orders</a>
 
                                 </div>
                                 <div class="row no-gutters align-items-center">
@@ -95,7 +95,7 @@
                             </div>
                             <div class="col-auto">
                                 <!-- <i class="fas fa-clipboard-list fa-2x text-gray-300"></i> -->
-                                <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                                <i class="uil uil-th-large"></i>
                             </div>
                         </div>
                     </div>

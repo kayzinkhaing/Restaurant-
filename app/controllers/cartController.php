@@ -29,6 +29,15 @@ class cartController extends Controller
         ];
         $this->view('pages/cart', $data);
     }
+   
+    public function payMent()
+    {
+        $carts = $this->db->getByCategoryId ('cart_view', 'user_id', $this->userId);
+        $data = [
+            'carts' => $carts
+        ];
+        $this->view('pages/pay', $data);
+    }
 
     public function destroy($id)
     {
@@ -107,6 +116,8 @@ class cartController extends Controller
         
         
     }
+
+    
     public function decreaseQuantity()
 {
     if (isset($_POST['user_id']) && isset($_POST['item_id']) && isset($_POST['price'])) {
@@ -142,7 +153,7 @@ public function increaseQuantity()
 
         if ($currentQty < $totalQty) {
             if ($this->db->increaseQuantity($userId, $itemId, $price)) {
-                $cartCount = $this-> getCartCount($userId);
+                $cartCount = $this->getCartCount($userId);
                 echo json_encode(['canIncrease' => true, 'cartCount' => $cartCount]);
             } else {
                 echo json_encode(['canIncrease' => false, 'cartCount' => $this->getCartCount($userId)]);
