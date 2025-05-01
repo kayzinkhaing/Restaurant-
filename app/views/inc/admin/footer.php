@@ -24,8 +24,8 @@
     <!-- <script src="<?//php echo URLROOT; ?>/js/admin/Chart.min.js"></script> -->
 
     <!-- Page level custom scripts -->
-    <script src="<?php echo URLROOT; ?>/js/admin/chart-area-demo.js"></script>
-    <script src="<?php echo URLROOT; ?>/js/admin/chart-pie-demo.js"></script>
+    <!-- <script src="<?php echo URLROOT; ?>/js/admin/chart-area-demo.js"></script> -->
+    <!-- <script src="<?php echo URLROOT; ?>/js/admin/chart-pie-demo.js"></script> -->
 
 
    <!-- Copyright -->

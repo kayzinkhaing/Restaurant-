@@ -1,3 +1,6 @@
+
+
+
 <?php require_once APPROOT . '/views/inc/admin/header.php'; ?>
 <?php require_once APPROOT . '/views/inc/admin/sidebar.php'; ?>
 <?php require_once APPROOT . '/views/inc/admin/navbar.php'; ?>

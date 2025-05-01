@@ -84,9 +84,9 @@
                         <div class="col-4 text-right">
                               <button class="btn btn-primary btn-add-to-cart" 
                               data-user-id="<?= $_SESSION['user_id'] ?? 0 ?>" data-item-id="<?= $menu['id'] ?>" data-price="<?= $menu['price'] ?>">
-                                  <i class="fas fa-cart-plus"></i>
+                                  <i class="uil uil-shopping-cart-alt"></i>
                               </button>
-                </div>
+                        </div>
                       </div>
                     </div>
                   </div>

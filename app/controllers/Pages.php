@@ -43,13 +43,17 @@ class Pages extends Controller
     {
         $this->view('pages/cart');
     }
-    public function success()
+    public function pay()
     {
-        $this->view('pages/success');
+        $this->view('pages/pay');
     }
     public function book()
     {
         $this->view('pages/booking');
+    }
+    public function success()
+    {
+        $this->view('pages/success');
     }
 
     public function dashboard()

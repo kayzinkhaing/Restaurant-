@@ -5,115 +5,115 @@ class orderController extends Controller
     private $db;
 
     public function __construct(){
-        $this->model('OrderModel');
+        $this->model('OrderItemModel');
+        $this->model('orderModel');
         $this->db = new Database();
     }
 
-    public function index(){
-        $orders = $this->db->readAll('user_order');
-        $data = [
-            'orders' => $orders
-        ];
-        $this->view('admin/order', $data);
-    }
-
-    public function create(){
-        $this->view('admin/Order/addOrder');
-    }
-
-    // public function store(){
-    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {    
-    //         $userId = $_POST['user_id'];
-    //         $itemId = $_POST['item_id'];
-    //         $quantity = $_POST['Quantity'];
-    //         $totalAmount = $_POST['total_amount'];
-    //         $status = $_POST['Status'];
-    //         $seatNo = $_POST['seat_no'];
-
-    //         // Create new order
-    //         $order = new OrderModel();
-    //         $order->setUserId($userId);
-    //         $order->setItemId($itemId);
-    //         $order->setQuantity($quantity);
-    //         $order->setTotalAmount($totalAmount);
-    //         $order->setStatus($status);
-    //         $order->setTable_number($seatNo);
-    //         $order->setRegDate(date('Y-m-d H:i:s'));
-
-    //         // Save order to database
-    //         $orderCreated = $this->db->create('orders', $order->toArray());
-    //         if ($orderCreated) {
-    //             setMessage('success', 'Order Created Successfully');
-    //             redirect('orderController/index');
-    //         } else {
-    //             setMessage('error', 'Order Creation Failed');
-    //             redirect('orderController/create');
-    //         }
-    //     }
+    // public function create(){
+    //     $this->view('admin/Order/addOrder');
     // }
+    public function index(){
 
-    public function edit($id){
-        $order = $this->db->getById('orders', $id);
+        $order = $this->db->readAll('order_item');
         $data = [
-            'order' => $order,
+            'order'=>$order
         ];
-        $this->view('admin/Order/edit', $data);
+
+        $this->view('admin/order',$data);
+    }
+    public function create(){
+        $this->view('admin/order');
+    }
+    public function success(){
+        $this->view('pages/success');
     }
 
-    public function update(){
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            if (isset($_POST['id'], $_POST['user_id'], $_POST['item_id'], $_POST['Quantity'], $_POST['total_amount'], $_POST['Status'], $_POST['table_number'])) {
-                $id = $_POST['id'];
-                $userId = $_POST['user_id'];
-                $itemId = $_POST['item_id'];
-                $quantity = $_POST['Quantity'];
-                $totalAmount = $_POST['total_amount'];
-                $status = $_POST['Status'];
-                $seat_id = $_POST['table_number'];
+    public function store()
+{
+    // print_r("hello");
+    // exit;
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Retrieve and sanitize input data
+        $user_id = htmlspecialchars($_POST[$_SESSION['user_id']]);
+        $totalQty = htmlspecialchars($_POST['totalQty']);
+        $totalAmount = htmlspecialchars($_POST['totalAmount']);
+        $carts = json_decode($_POST['carts'], true); // true for associative array, false for object
 
-                // Create a new OrderModel instance and set its properties
-                $order = new OrderModel();
-                $order->setId($id);
-                $order->setUserId($userId);
-                $order->setItemId($itemId);
-                $order->setQuantity($quantity);
-                $order->setTotalAmount($totalAmount);
-                $order->setStatus($status);
+        // Create new order
+        $order = new OrderModel();
+        $order->setUserId($user_id);
+        $order->setTotalQty($totalQty);
+        $order->setTotalAmount($totalAmount);
+
+        // Save order to database
+        $orderCreated = $this->db->create('orders', $order->toArray());
+
+        if ($orderCreated) {
+            // Fetch the last inserted order ID
+            $order_id = $orderCreated;
+
+            // Create order items
+            $orderItem = new OrderItemModel();
+
+            foreach ($carts as $item) {
+                $orderItem->setOrder_id($order_id);
+                $orderItem->setMenu_id($item['menu_id']);
+                $orderItem->setPrice($item['sale_price']);
+                $orderItem->setQuantity($item['quantity']);
+                $orderItem->setTotalAmount($item['total_amount']);
+
                 
-                // Update the order in the database
-                $updateOrder = $this->db->update('orders', $order->getId(), $order->toArray());
+                // Save order item to database
+                $this->db->create('orderitem', $orderItem->toArray());
 
-                if ($updateOrder) {
-                    setMessage('success', 'Order Updated Successfully');
-                    redirect('orderController/index');
+                // Reduce menu quantity
+                $this->db->updateMenuQuantity('menu', $item['menu_id'], $item['quantity']);
+           
+
+            // Assume user_ids is an array of user IDs for whom you want to delete the cart
+            $user_ids = [$user_id]; // Add more user IDs if needed
+
+            // Instantiate cartController and call deleteCart
+            $cartController = new cartController();
+            $cartController->deleteCart($user_ids);
+        }
+            setMessage('success', 'Order Created Successfully');
+            redirect('orderController/success');
+        } else {
+            setMessage('error', 'Failed to Create Order');
+            redirect('orderController/create');
+        }
+    } else {
+        setMessage('error', 'Invalid Request Method');
+        redirect('orderController/create');
+    }
+}
+public function deleteCart($user_ids)
+{
+    // Check if the user IDs are valid and numeric
+    if (is_array($user_ids) && !empty($user_ids)) {
+        foreach ($user_ids as $user_id) {
+            if (is_numeric($user_id)) {
+                $cart = new cartModel();
+                $cart->setUserId($user_id);
+
+                // Assuming `delete` is a method in your database abstraction layer
+                $isdestroy = $this->db->deleteByUserId('cart', ['user_id' => $cart->getUserId()]);
+
+                if ($isdestroy) {
+                    setMessage('success', 'Cart Deleted Successfully for User ID: ' . $user_id);
                 } else {
-                    setMessage('error', 'Failed to Update Order');
-                    redirect('orderController/index');
+                    setMessage('error', 'Failed to Delete Cart for User ID: ' . $user_id);
                 }
             } else {
-                setMessage('error', 'Missing required fields');
-                redirect('orderController/index');
+                setMessage('error', 'Invalid User ID: ' . $user_id);
             }
         }
+    } else {
+        setMessage('error', 'Invalid User IDs');
     }
+}
 
-    public function destroy($id){
-        if ($id && is_numeric($id)) {
-            $order = new OrderModel();
-            $order->setId($id);
 
-            // Delete the order from the database
-            $isdestroy = $this->db->delete ('orders', $order->getId());
-
-            if ($isdestroy) {
-                setMessage('success', 'Order Deleted Successfully');
-            } else {
-                setMessage('error', 'Failed to Delete Order');
-            }
-        } else {
-            setMessage('error', 'Invalid Order ID');
-        }
-
-        redirect('orderController/index');
-    }
 }

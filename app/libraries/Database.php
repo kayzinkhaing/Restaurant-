@@ -33,6 +33,17 @@ class Database
         }
     }
 
+   public function updateMenuQuantity($table, $menu_id, $quantity)
+{
+    $sql = 'UPDATE ' . $table . ' SET `quantity` = `quantity` - :quantity WHERE `id` = :menu_id';
+    $stm = $this->pdo->prepare($sql);
+    $stm->bindValue(':quantity', $quantity);
+    $stm->bindValue(':menu_id', $menu_id);
+    $success = $stm->execute();
+    return $success;
+}
+
+
     public function create($table, $data)
     {
         try {
